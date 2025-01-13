@@ -24,7 +24,7 @@
 pipeline {
     agent {
         docker {
-            image 'custom-jenkins-agent'
+            image '7002370412/jenkins-jenkins:latest'
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker'
         }
     }
