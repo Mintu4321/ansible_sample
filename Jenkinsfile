@@ -1,7 +1,9 @@
 pipeline {
     agent { 
-        label 'docker-agent'
-        
+        label 'docker-agent'      
+    }
+    environment {
+        DOCKER_SOCKET = '/var/run/docker.sock'
     }
 
     stages {
