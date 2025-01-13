@@ -4,7 +4,7 @@ pipeline {
      }
     environment {
         DOCKER_SOCKET = '/var/run/docker.sock'
-        PATH = "${env.PATH}:/opt/homebrew/bin"
+        PATH = "${env.PATH}:/usr/bin/docker"
     }
     
     stages {
@@ -15,11 +15,15 @@ pipeline {
         }
         stage('docker check') {
             steps {
-                sh 'docker ps -a'
+                script {
+                    // Ensure Docker socket is mounted properly (in case of running in a container)
+                    sh "docker --host=unix://${env.DOCKER_SOCKET} images"
+                }
             }
         }
     }
 }
+
 
 // pipeline {
 //     agent {
