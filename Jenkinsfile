@@ -25,7 +25,7 @@ pipeline {
     agent {
         docker {
             image '7002370412/jenkins-jenkins:latest'
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker'
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
