@@ -1,31 +1,30 @@
-pipeline {
-    agent {
-        label 'docker-agent'  // Make sure the agent label matches the correct agent node
-    }
+ pipeline {
+    agent { label 'docker-agent' }
     environment {
-        // Set the path for the Docker socket to be accessible
         DOCKER_SOCKET = '/var/run/docker.sock'
-        PATH = "${env.PATH}:/usr/bin/docker" // Ensure the docker binary is in the PATH
+        PATH = "${env.PATH}:/usr/bin/docker"
     }
     stages {
-        stage('Build Docker Image') {
+        stage('Hello') {
             steps {
-                script {
-                    // Run Docker commands from within the pipeline
-                    sh 'docker --host=unix://${env.DOCKER_SOCKET} images'
-                }
+                sh '''
+                    echo "Shell: $SHELL"
+                    echo "DOCKER_SOCKET: $DOCKER_SOCKET"
+                    ansible-playbook playbook.yml
+                '''
             }
         }
-        stage('Run Docker Container') {
+        stage('docker check') {
             steps {
-                script {
-                    // Run a Docker container from an image (just as an example)
-                    sh 'docker --host=unix://${env.DOCKER_SOCKET} run hello-world'
-                }
+                sh '''
+                    echo "Using Docker socket: $DOCKER_SOCKET"
+                    docker --host=unix://${env.DOCKER_SOCKET} images
+                '''
             }
         }
     }
 }
+
 
 
 // pipeline {
