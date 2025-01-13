@@ -10,5 +10,10 @@ pipeline {
                 sh 'ansible-playbook playbook.yml'
             }
         }
+        stage('docker check') {
+            steps {
+                sh 'docker ps -a'
+            }
+        }
     }
 }
