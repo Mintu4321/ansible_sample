@@ -1,11 +1,10 @@
 pipeline {
     agent { 
-        label 'docker-agent'  
-        
+        label 'docker-agent'       
     }
     environment {
         DOCKER_SOCKET = '/var/run/docker.sock'
-        args '-v /var/run/docker.sock:/var/run/docker.sock' 
+        PATH = "${env.PATH}:/opt/homebrew/bin"
     }
     
     stages {
