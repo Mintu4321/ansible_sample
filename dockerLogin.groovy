@@ -3,7 +3,7 @@ def login(String credentialsId) {
         // Fetch credentials securely
         withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'username', passwordVariable: 'password')]) {
             // Execute docker login
-           def result = sh(script: "docker login -u ${username} --password-stdin", returnStdout: true).trim()
+           def result = sh(script: "docker login -u '${username}' --password-stdin", returnStdout: true).trim()
             echo "Docker login is successful"
             return result
             
