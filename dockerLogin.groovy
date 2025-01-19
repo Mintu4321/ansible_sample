@@ -9,5 +9,7 @@ def login(String credentialsId) {
         }
     } catch (Exception e) {
         echo "Error occurred: ${e.message}"
+        return None
     }
 }
+return this
