@@ -4,7 +4,9 @@ def login(String credentialsId) {
         withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'username', passwordVariable: 'password')]) {
             // Execute docker login
             echo "username: ${username}"
-            def result = sh(script: "docker login -u ${username} -p ${password}", returnStdout: true).trim()
+            set -x
+            def result = sh(script: 'docker login -u "${username}" -p "${password}"', returnStdout: true).trim()
+            set +x
             echo "Docker login is successful"
             return result
         }
