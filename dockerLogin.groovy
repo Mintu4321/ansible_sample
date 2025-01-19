@@ -1,18 +1,13 @@
-
 def dockerLogin(String credentialsId) {
     try {
-       withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'username', passwordVariable: 'password')]) {
-        def result = sh(script: "docker login -u ${username} -p ${password}")
-        echo "docker login is successful"
-        return result
-       }
+        // Fetch credentials securely
+        withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'username', passwordVariable: 'password')]) {
+            // Execute docker login
+            def result = sh(script: "docker login -u ${username} -p ${password}", returnStdout: true).trim()
+            echo "Docker login is successful"
+            return result
         }
-    catch (Exception e) {
-        echo "Error occurred as: ${e.message}"
-
-
-
+    } catch (Exception e) {
+        echo "Error occurred: ${e.message}"
     }
-
 }
-
