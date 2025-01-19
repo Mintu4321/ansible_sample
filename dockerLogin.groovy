@@ -1,4 +1,4 @@
-def dockerLogin(String credentialsId) {
+def login(String credentialsId) {
     try {
         // Fetch credentials securely
         withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'username', passwordVariable: 'password')]) {
