@@ -31,7 +31,7 @@ pipeline {
     agent { label 'azure' }
         environment {
         DOCKER_SOCKET = '/var/run/docker.sock'
-        PATH = "${env.PATH}:/opt/homebrew/bin/docker"
+        PATH = "${env.PATH}:/opt/homebrew/bin"
     }
     stages {
         stage('Docker Login') {
