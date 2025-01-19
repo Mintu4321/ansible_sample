@@ -39,6 +39,14 @@ pipeline {
                 script {
                     // Load the dockerLogin.groovy script
                     def dockerLogin = load 'dockerLogin.groovy'
+                    if dockerLogin == null {
+                        echo "Failed to load docker login"
+                        
+                    }
+                    else {
+                        echo "Docker login loaded sucessfully"
+                        
+                    }
                     
                     // Call the login function and pass the credentialsId
                     def loginResult = dockerLogin.login('docker_login')
