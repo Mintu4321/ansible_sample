@@ -39,7 +39,7 @@ pipeline {
                 script {
                     // Load the dockerLogin.groovy script
                     def dockerLogin = load 'dockerLogin.groovy'
-                    if dockerLogin == null {
+                    if (dockerLogin == null) {
                         echo "Failed to load docker login"
                         
                     }
