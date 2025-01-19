@@ -39,7 +39,7 @@ pipeline {
                 script {
                     // Load the dockerLogin.groovy script
                     def dockerLogin = load 'dockerLogin.groovy'
-                    sh 'usermod -aG docker $user
+                    sh 'usermod -aG docker $user'
                     if (dockerLogin == null) {
                         echo "Failed to load docker login"
                         
