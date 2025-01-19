@@ -38,7 +38,8 @@ pipeline {
             steps {
               script {
                def credentialsId = "docker_login"
-               def loginResult =  dockerLogin(credentialsId)
+               def myScript = load 'dockerLogin.groovy'
+               def loginResult =  myScript.dockerLogin(credentialsId)
                if (loginResult == null) {
                         error("Docker login failed. Stopping the pipeline.")
                     } else {
