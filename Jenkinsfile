@@ -28,7 +28,10 @@
 
 
 pipeline {
-    agent any
+    agent {
+        label "azure"
+        
+    }
       
     stages {
         stage('Docker login') {
