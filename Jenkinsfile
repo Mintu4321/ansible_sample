@@ -28,7 +28,7 @@
 
 
 pipeline {
-    agent any
+    agent { label 'azure' }
         environment {
         DOCKER_SOCKET = '/var/run/docker.sock'
         PATH = "${env.PATH}:/usr/bin/docker"
