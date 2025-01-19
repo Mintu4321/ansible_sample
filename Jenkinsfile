@@ -26,27 +26,34 @@
 // }
 
 
+def dockerLogin(String credentialsId) {
+    try {
+        // Fetch credentials securely
+        withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'username', passwordVariable: 'password')]) {
+            // Execute docker login
+            def result = sh(script: "docker login -u ${username} -p ${password}", returnStdout: true).trim()
+            echo "Docker login is successful"
+            return result
+        }
+    } catch (Exception e) {
+        echo "Error occurred: ${e.message}"
+    }
+}
 
 pipeline {
     agent {
         label 'azure'
-        
     }
-      
+
     stages {
-        stage('Docker login') {
+        stage('Login to Docker') {
             steps {
-              script {
-               def credentialsId = "docker_login"
-               def myScript = load 'dockerLogin.groovy'
-               def loginResult =  myScript.dockerLogin(credentialsId)
-               if (loginResult == null) {
-                        error("Docker login failed. Stopping the pipeline.")
-                    } else {
-                        echo "Docker login result: ${loginResult}"
-                    }
-              }
+                script {
+                    // Now call the dockerLogin function after it has been defined
+                    dockerLogin('docker_login')
+                }
             }
         }
     }
 }
+
