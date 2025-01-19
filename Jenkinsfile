@@ -35,7 +35,7 @@ pipeline {
             steps {
               script {
                def credentialsId = "docker_login"
-               def loginResult =  dockerLogin(String credentialsId)
+               def loginResult =  dockerLogin(credentialsId)
                if (loginResult == null) {
                         error("Docker login failed. Stopping the pipeline.")
                     } else {
