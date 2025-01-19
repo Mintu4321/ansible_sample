@@ -39,7 +39,7 @@ pipeline {
         stage('Login to Docker') {
             steps {
                 script {
-                    def credentials = load 'dockerLogin.groovy'
+                    def credentials = load 'ansible_sample/dockerLogin.groovy'
                     // Now call the dockerLogin function after it has been defined
                     credentials.dockerLogin('docker_login')
                 }
