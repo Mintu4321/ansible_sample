@@ -34,6 +34,7 @@ pipeline {
     environment {
         DOCKER_SOCKET = '/var/run/docker.sock'
         PATH = "${env.PATH}:/usr/bin/docker"
+    }
     stages {
         stage('Login to Docker') {
             steps {
