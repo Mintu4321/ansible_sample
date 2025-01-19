@@ -28,23 +28,29 @@
 
 
 pipeline {
-    agent {
-        label 'azure'
-    }
-    environment {
+    agent any
+        environment {
         DOCKER_SOCKET = '/var/run/docker.sock'
         PATH = "${env.PATH}:/usr/bin/docker"
     }
     stages {
-        stage('Login to Docker') {
+        stage('Docker Login') {
             steps {
                 script {
-                    def credentials = load 'dockerLogin.groovy'
-                    // Now call the dockerLogin function after it has been defined
-                    credentials.login('docker_login')
+                    // Load the dockerLogin.groovy script
+                    def dockerLogin = load 'dockerLogin.groovy'
+                    
+                    // Call the login function and pass the credentialsId
+                    def loginResult = dockerLogin.login('docker_login')
+
+                    // Check the result (optional, based on your logic)
+                    if (loginResult == null) {
+                        error "Docker login failed!"
+                    } else {
+                        echo "Docker login was successful!"
+                    }
                 }
             }
         }
     }
 }
-
