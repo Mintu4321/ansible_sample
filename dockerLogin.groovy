@@ -6,7 +6,7 @@ def login(String credentialsId) {
            
             
             sh '''#!/bin/bash
-                docker login -u "$username" --password-stdin
+                docker login -u "${username}" --password-stdin
             '''
             echo "Docker login is successful"
             
