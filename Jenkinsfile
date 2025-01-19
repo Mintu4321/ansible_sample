@@ -29,7 +29,7 @@
 
 pipeline {
     agent {
-        label "azure"
+        label 'azure'
         
     }
       
